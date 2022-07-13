@@ -1,0 +1,40 @@
+
+entity Categoria {
+	nome String
+    descricao String
+}
+
+entity SubCategoria {
+	nome String
+    descricao String  
+}
+
+entity Despesa {
+	nome String
+    descricao String
+    valor Double
+    dtVcto LocalDate
+    dtPgto LocalDate
+    user User
+}
+
+enum User {
+    WESLEY, FADIA, CASAL
+}
+
+relationship OneToMany {
+	Categoria{subCategorias(nome)} to SubCategoria{categoria(nome)}
+    SubCategoria{despesas(nome)} to Despesa{subCategoria(nome)}
+}
+
+// Set pagination options
+paginate Categoria, SubCategoria, Despesa with infinite-scroll
+
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

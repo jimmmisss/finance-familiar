@@ -1,0 +1,49 @@
+{
+  "applications": "*",
+  "changelogDate": "20220713223338",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "despesa",
+  "fields": [
+    {
+      "fieldName": "nome",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "descricao",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "valor",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "dtVcto",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dtPgto",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "user",
+      "fieldType": "User",
+      "fieldValues": "WESLEY,FADIA,CASAL"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Despesa",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "nome",
+      "otherEntityName": "subCategoria",
+      "otherEntityRelationshipName": "despesas",
+      "relationshipName": "subCategoria",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

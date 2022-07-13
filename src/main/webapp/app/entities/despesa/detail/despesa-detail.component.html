@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="despesa">
+      <h2 data-cy="despesaDetailsHeading"><span>Despesa</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ despesa.id }}</span>
+        </dd>
+        <dt><span>Nome</span></dt>
+        <dd>
+          <span>{{ despesa.nome }}</span>
+        </dd>
+        <dt><span>Descricao</span></dt>
+        <dd>
+          <span>{{ despesa.descricao }}</span>
+        </dd>
+        <dt><span>Valor</span></dt>
+        <dd>
+          <span>{{ despesa.valor }}</span>
+        </dd>
+        <dt><span>Dt Vcto</span></dt>
+        <dd>
+          <span>{{ despesa.dtVcto | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Dt Pgto</span></dt>
+        <dd>
+          <span>{{ despesa.dtPgto | formatMediumDate }}</span>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+          <span>{{ despesa.user }}</span>
+        </dd>
+        <dt><span>Sub Categoria</span></dt>
+        <dd>
+          <div *ngIf="despesa.subCategoria">
+            <a [routerLink]="['/sub-categoria', despesa.subCategoria?.id, 'view']">{{ despesa.subCategoria?.nome }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/despesa', despesa.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

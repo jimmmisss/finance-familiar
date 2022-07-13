@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="subCategoria">
+      <h2 data-cy="subCategoriaDetailsHeading"><span>Sub Categoria</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ subCategoria.id }}</span>
+        </dd>
+        <dt><span>Nome</span></dt>
+        <dd>
+          <span>{{ subCategoria.nome }}</span>
+        </dd>
+        <dt><span>Descricao</span></dt>
+        <dd>
+          <span>{{ subCategoria.descricao }}</span>
+        </dd>
+        <dt><span>Categoria</span></dt>
+        <dd>
+          <div *ngIf="subCategoria.categoria">
+            <a [routerLink]="['/categoria', subCategoria.categoria?.id, 'view']">{{ subCategoria.categoria?.nome }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/sub-categoria', subCategoria.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

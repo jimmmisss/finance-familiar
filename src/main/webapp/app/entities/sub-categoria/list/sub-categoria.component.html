@@ -1,0 +1,86 @@
+<div>
+  <h2 id="page-heading" data-cy="SubCategoriaHeading">
+    <span>Sub Categorias</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="reset()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-sub-categoria"
+        [routerLink]="['/sub-categoria/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Sub Categoria </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="subCategorias?.length === 0">
+    <span>No subCategorias found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="subCategorias && subCategorias.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="reset()">
+          <th scope="col" jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="nome"><span>Nome</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="descricao"><span>Descricao</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="categoria.nome"><span>Categoria</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+        <tr *ngFor="let subCategoria of subCategorias; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/sub-categoria', subCategoria.id, 'view']">{{ subCategoria.id }}</a>
+          </td>
+          <td>{{ subCategoria.nome }}</td>
+          <td>{{ subCategoria.descricao }}</td>
+          <td>
+            <div *ngIf="subCategoria.categoria">
+              <a [routerLink]="['/categoria', subCategoria.categoria?.id, 'view']">{{ subCategoria.categoria?.nome }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/sub-categoria', subCategoria.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/sub-categoria', subCategoria.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(subCategoria)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
