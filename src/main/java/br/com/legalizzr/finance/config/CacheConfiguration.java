@@ -48,6 +48,11 @@ public class CacheConfiguration {
             createCache(cm, br.com.legalizzr.finance.domain.User.class.getName());
             createCache(cm, br.com.legalizzr.finance.domain.Authority.class.getName());
             createCache(cm, br.com.legalizzr.finance.domain.User.class.getName() + ".authorities");
+            createCache(cm, br.com.legalizzr.finance.domain.Categoria.class.getName());
+            createCache(cm, br.com.legalizzr.finance.domain.Categoria.class.getName() + ".subCategorias");
+            createCache(cm, br.com.legalizzr.finance.domain.SubCategoria.class.getName());
+            createCache(cm, br.com.legalizzr.finance.domain.SubCategoria.class.getName() + ".despesas");
+            createCache(cm, br.com.legalizzr.finance.domain.Despesa.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

@@ -1,0 +1,94 @@
+<div>
+  <h2 id="page-heading" data-cy="DespesaHeading">
+    <span>Despesas</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="reset()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-despesa"
+        [routerLink]="['/despesa/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Despesa </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="despesas?.length === 0">
+    <span>No despesas found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="despesas && despesas.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="reset()">
+          <th scope="col" jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="nome"><span>Nome</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="descricao"><span>Descricao</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="valor"><span>Valor</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="dtVcto"><span>Dt Vcto</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="dtPgto"><span>Dt Pgto</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="user"><span>User</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="subCategoria.nome"><span>Sub Categoria</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+        <tr *ngFor="let despesa of despesas; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/despesa', despesa.id, 'view']">{{ despesa.id }}</a>
+          </td>
+          <td>{{ despesa.nome }}</td>
+          <td>{{ despesa.descricao }}</td>
+          <td>{{ despesa.valor }}</td>
+          <td>{{ despesa.dtVcto | formatMediumDate }}</td>
+          <td>{{ despesa.dtPgto | formatMediumDate }}</td>
+          <td>{{ despesa.user }}</td>
+          <td>
+            <div *ngIf="despesa.subCategoria">
+              <a [routerLink]="['/sub-categoria', despesa.subCategoria?.id, 'view']">{{ despesa.subCategoria?.nome }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/despesa', despesa.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/despesa', despesa.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(despesa)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

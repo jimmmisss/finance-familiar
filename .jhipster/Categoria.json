@@ -1,0 +1,32 @@
+{
+  "applications": "*",
+  "changelogDate": "20220713223336",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "categoria",
+  "fields": [
+    {
+      "fieldName": "nome",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "descricao",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Categoria",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "nome",
+      "otherEntityName": "subCategoria",
+      "otherEntityRelationshipName": "categoria",
+      "relationshipName": "subCategorias",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

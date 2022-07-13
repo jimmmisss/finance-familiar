@@ -1,0 +1,104 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-despesa-heading" data-cy="DespesaCreateUpdateHeading">Create or edit a Despesa</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_nome">Nome</label>
+          <input type="text" class="form-control" name="nome" id="field_nome" data-cy="nome" formControlName="nome" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_descricao">Descricao</label>
+          <input type="text" class="form-control" name="descricao" id="field_descricao" data-cy="descricao" formControlName="descricao" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_valor">Valor</label>
+          <input type="number" class="form-control" name="valor" id="field_valor" data-cy="valor" formControlName="valor" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_dtVcto">Dt Vcto</label>
+          <div class="input-group">
+            <input
+              id="field_dtVcto"
+              data-cy="dtVcto"
+              type="text"
+              class="form-control"
+              name="dtVcto"
+              ngbDatepicker
+              #dtVctoDp="ngbDatepicker"
+              formControlName="dtVcto"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dtVctoDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_dtPgto">Dt Pgto</label>
+          <div class="input-group">
+            <input
+              id="field_dtPgto"
+              data-cy="dtPgto"
+              type="text"
+              class="form-control"
+              name="dtPgto"
+              ngbDatepicker
+              #dtPgtoDp="ngbDatepicker"
+              formControlName="dtPgto"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dtPgtoDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_user">User</label>
+          <select class="form-control" name="user" formControlName="user" id="field_user" data-cy="user">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let user of userValues" [value]="user">user</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_subCategoria">Sub Categoria</label>
+          <select class="form-control" id="field_subCategoria" data-cy="subCategoria" name="subCategoria" formControlName="subCategoria">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                subCategoriaOption.id === editForm.get('subCategoria')!.value?.id ? editForm.get('subCategoria')!.value : subCategoriaOption
+              "
+              *ngFor="let subCategoriaOption of subCategoriasSharedCollection; trackBy: trackSubCategoriaById"
+            >
+              {{ subCategoriaOption.nome }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
