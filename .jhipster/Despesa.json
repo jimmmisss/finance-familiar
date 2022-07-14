@@ -1,0 +1,63 @@
+{
+  "applications": "*",
+  "changelogDate": "20220714150153",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "despesa",
+  "fields": [
+    {
+      "fieldName": "mes",
+      "fieldType": "Mes",
+      "fieldValues": "JANEIRO,FEVEREIRO,MARCO,ABRIL,MAIO,JUNHO,JULHO,AGOSTO,SETEMBRO,OUTUBRO,NOVEMBRO,DEZEMBRO"
+    },
+    {
+      "fieldName": "nome",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "descricao",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "valor",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "dtVcto",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dtPgto",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "formaPgto",
+      "fieldType": "FormaPgto",
+      "fieldValues": "BOLETO,DEBITO,DEBITO_AUT,CREDITO,DINHEIRO"
+    },
+    {
+      "fieldName": "responsavel",
+      "fieldType": "Responsavel",
+      "fieldValues": "WESLEY,FADIA,CASAL"
+    },
+    {
+      "fieldName": "dtCadastro",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Despesa",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "nome",
+      "otherEntityName": "subCategoria",
+      "otherEntityRelationshipName": "despesas",
+      "relationshipName": "subCategoria",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

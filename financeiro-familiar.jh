@@ -1,0 +1,54 @@
+
+entity Categoria {
+	nome String
+    descricao String
+    dtCadastro Instant
+}
+
+entity SubCategoria {
+	nome String
+    descricao String
+    dtCadastro Instant
+}
+
+entity Despesa {
+	mes Mes
+	nome String
+    descricao String
+    valor Double
+    dtVcto LocalDate
+    dtPgto LocalDate
+    formaPgto FormaPgto
+    responsavel Responsavel
+    dtCadastro Instant
+}
+
+enum Mes {
+	JANEIRO, FEVEREIRO, MARCO, ABRIL, MAIO, JUNHO, JULHO, AGOSTO, SETEMBRO,
+    OUTUBRO, NOVEMBRO, DEZEMBRO
+}
+
+enum FormaPgto {
+	BOLETO, DEBITO, DEBITO_AUT, CREDITO, DINHEIRO
+}
+
+enum Responsavel {
+    WESLEY, FADIA, CASAL
+}
+
+relationship OneToMany {
+	Categoria{subCategorias(nome)} to SubCategoria{categoria(nome)}
+    SubCategoria{despesas(nome)} to Despesa{subCategoria(nome)}
+}
+
+// Set pagination options
+paginate Categoria, SubCategoria, Despesa with infinite-scroll
+
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

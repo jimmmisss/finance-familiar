@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity Despesa.
+    -->
+    <changeSet id="20220714150153-1" author="jhipster">
+        <createTable tableName="despesa">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="mes" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="nome" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="descricao" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="valor" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="dt_vcto" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="dt_pgto" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="forma_pgto" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="responsavel" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="dt_cadastro" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="sub_categoria_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+        <dropDefaultValue tableName="despesa" columnName="dt_cadastro" columnDataType="${datetimeType}"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20220714150153-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/despesa.csv"
+                  separator=";"
+                  tableName="despesa"
+                  usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+            <column name="mes" type="string"/>
+            <column name="nome" type="string"/>
+            <column name="descricao" type="string"/>
+            <column name="valor" type="numeric"/>
+            <column name="dt_vcto" type="date"/>
+            <column name="dt_pgto" type="date"/>
+            <column name="forma_pgto" type="string"/>
+            <column name="responsavel" type="string"/>
+            <column name="dt_cadastro" type="date"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

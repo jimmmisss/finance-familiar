@@ -1,0 +1,43 @@
+{
+  "applications": "*",
+  "changelogDate": "20220714150152",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "sub_categoria",
+  "fields": [
+    {
+      "fieldName": "nome",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "descricao",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dtCadastro",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "SubCategoria",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "nome",
+      "otherEntityName": "despesa",
+      "otherEntityRelationshipName": "subCategoria",
+      "relationshipName": "despesas",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "nome",
+      "otherEntityName": "categoria",
+      "otherEntityRelationshipName": "subCategorias",
+      "relationshipName": "categoria",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}
